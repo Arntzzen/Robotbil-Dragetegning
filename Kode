@@ -1,0 +1,108 @@
+#include <Wire.h>
+#include <Zumo32U4.h>
+
+Zumo32U4Motors motors;
+Zumo32U4ButtonA buttonA;
+Zumo32U4Buzzer buzzer;
+Zumo32U4OLED display;
+
+void munn() {
+  motors.setLeftSpeed(0);
+  motors.setRightSpeed(200);
+  delay(100);
+  motors.setLeftSpeed(200);
+  motors.setRightSpeed(0);
+  delay(100);
+}
+
+void munn_b() {
+  motors.setLeftSpeed(0);
+  motors.setRightSpeed(-200);
+  delay(100);
+  motors.setLeftSpeed(-200);
+  motors.setRightSpeed(0);
+  delay(100);
+}
+
+void snu_munn() {
+  motors.setLeftSpeed(200);
+  motors.setRightSpeed(-200);
+  delay(100);
+  motors.setLeftSpeed(200);
+  motors.setRightSpeed(200);
+  delay(100);
+  motors.setLeftSpeed(-200);
+  motors.setRightSpeed(200);
+  delay(185);
+  motors.setLeftSpeed(-200);
+  motors.setRightSpeed(-200);
+  delay(150);
+}
+
+void fremover() {
+  motors.setLeftSpeed(200);
+  motors.setRightSpeed(200);
+  delay(200);
+}
+
+void hake() {
+  motors.setRightSpeed(-200);
+  motors.setLeftSpeed(200);
+  delay(100);
+  motors.setRightSpeed(200);
+  motors.setLeftSpeed(200);
+  delay(100);
+  motors.setRightSpeed(200);
+  motors.setLeftSpeed(-200);
+  delay(75);
+  motors.setRightSpeed(200);
+  motors.setLeftSpeed(200);
+  delay(375);
+  motors.setRightSpeed(200);
+  motors.setLeftSpeed(-200);
+  delay(250);
+}
+
+void kropp() {
+  motors.setRightSpeed(-200);
+  motors.setLeftSpeed(-200);
+  delay(700);
+  motors.setRightSpeed(-200);
+  motors.setLeftSpeed(200);
+  delay(250);
+  motors.setRightSpeed(200);
+  motors.setLeftSpeed(200);
+  delay(750);
+}
+
+void stopp() {
+  motors.setLeftSpeed(0);
+  motors.setRightSpeed(0);
+}
+
+void setup() {
+  Serial.begin(9600);
+  display.clear();
+  display.print(F("DRAGE"));
+  delay (1500);
+  for(int i = 0; i < 3; i++) {
+    munn();
+  }
+  snu_munn();
+  for(int i = 0; i < 3; i++) {
+    munn_b();
+  }
+  hake();
+  kropp();
+  stopp();
+}
+
+
+void loop() {
+  display.clear();
+  display.print(F("FERDIG"));
+  ledRed(false);
+  delay(1000);
+  ledRed(true);
+  delay(1000);
+}
